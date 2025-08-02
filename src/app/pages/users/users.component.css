@@ -1,0 +1,50 @@
+/* Estilos específicos para el componente de usuarios */
+.mat-card {
+  border-radius: 12px;
+}
+
+.mat-card-header {
+  padding: 24px 24px 0 24px;
+}
+
+.mat-card-content {
+  padding: 24px;
+}
+
+/* Estilos para la tabla */
+.mat-table {
+  width: 100%;
+}
+
+.mat-header-cell {
+  font-weight: 600;
+  color: #374151;
+}
+
+.mat-cell {
+  padding: 12px 8px;
+}
+
+/* Estilos para los chips de roles */
+.mat-chip {
+  margin: 2px;
+  font-size: 0.75rem;
+}
+
+/* Estilos para los iconos de estado */
+.status-icon {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .mat-table {
+    font-size: 0.875rem;
+  }
+  
+  .mat-cell {
+    padding: 8px 4px;
+  }
+} 

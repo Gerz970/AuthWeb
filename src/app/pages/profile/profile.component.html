@@ -1,0 +1,170 @@
+<div class="min-h-screen bg-gray-100 py-8">
+  <div class="max-w-2xl mx-auto px-4">
+    @if (isLoading) {
+      <div class="flex justify-center items-center h-64">
+        <div class="text-center">
+          <mat-spinner diameter="50"></mat-spinner>
+          <p class="mt-4 text-gray-600">Cargando datos del usuario...</p>
+        </div>
+      </div>
+    } @else {
+      <mat-card class="shadow-lg">
+        <mat-card-header>
+          <mat-card-title class="text-2xl font-bold text-gray-800">
+            Detalles de la Cuenta
+          </mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content class="p-6">
+          <!-- Avatar Section -->
+          <div class="flex justify-center mb-6">
+            <div class="relative">
+              <div class="w-24 h-24 bg-blue-500 rounded-full flex items-center justify-center text-white text-3xl font-bold shadow-lg">
+                {{ getInitials(userDetail?.fullName || 'U') }}
+              </div>
+              <div class="absolute -top-2 -right-2 w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center cursor-pointer hover:bg-yellow-500 transition-colors">
+                <mat-icon class="text-white text-sm">edit</mat-icon>
+              </div>
+            </div>
+          </div>
+
+          <!-- User Information -->
+          <div class="space-y-4">
+            <!-- Full Name -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+              <label class="font-medium text-gray-700">Nombre Completo:</label>
+              <div class="md:col-span-2">
+                @if (isEditing) {
+                  <mat-form-field appearance="outline" class="w-full">
+                    <input matInput formControlName="fullName" placeholder="Nombre completo">
+                    <mat-error *ngIf="form.get('fullName')?.hasError('required')">
+                      El nombre es requerido
+                    </mat-error>
+                  </mat-form-field>
+                } @else {
+                  <p class="text-gray-900">{{ userDetail?.fullName || '-' }}</p>
+                }
+              </div>
+            </div>
+
+            <!-- Email -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+              <label class="font-medium text-gray-700">Email:</label>
+              <div class="md:col-span-2">
+                @if (isEditing) {
+                  <mat-form-field appearance="outline" class="w-full">
+                    <input matInput formControlName="email" placeholder="Email" type="email">
+                    <mat-error *ngIf="form.get('email')?.hasError('required')">
+                      El email es requerido
+                    </mat-error>
+                    <mat-error *ngIf="form.get('email')?.hasError('email')">
+                      Ingrese un email válido
+                    </mat-error>
+                  </mat-form-field>
+                } @else {
+                  <p class="text-gray-900">{{ userDetail?.email || '-' }}</p>
+                }
+              </div>
+            </div>
+
+            <!-- Roles -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+              <label class="font-medium text-gray-700">Roles:</label>
+              <div class="md:col-span-2">
+                @if (isEditing) {
+                  <mat-form-field appearance="outline" class="w-full">
+                    <mat-select formControlName="roles" multiple [disabled]="isLoadingRoles">
+                      @if (isLoadingRoles) {
+                        <mat-option disabled>
+                          <mat-spinner diameter="20"></mat-spinner>
+                          Cargando roles...
+                        </mat-option>
+                      } @else {
+                        @for (role of availableRoles; track role.id) {
+                          <mat-option [value]="role.name">
+                            {{ role.name }} ({{ role.totalUsers }} usuarios)
+                          </mat-option>
+                        }
+                      }
+                    </mat-select>
+                    <mat-error *ngIf="form.get('roles')?.hasError('required')">
+                      Al menos un rol es requerido
+                    </mat-error>
+                  </mat-form-field>
+                } @else {
+                  <div class="flex flex-wrap gap-2">
+                    @for (role of userDetail?.roles; track role) {
+                      <mat-chip color="primary" selected>{{ role }}</mat-chip>
+                    }
+                  </div>
+                }
+              </div>
+            </div>
+
+            <!-- Phone Number -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+              <label class="font-medium text-gray-700">Teléfono:</label>
+              <div class="md:col-span-2">
+                @if (isEditing) {
+                  <mat-form-field appearance="outline" class="w-full">
+                    <input matInput formControlName="phoneNumber" placeholder="Teléfono">
+                  </mat-form-field>
+                } @else {
+                  <div class="flex items-center gap-2">
+                    <p class="text-gray-900">{{ userDetail?.phoneNumber || '-' }}</p>
+                    @if (userDetail?.phoneNumberConfirmed) {
+                      <mat-icon class="text-green-500 text-sm">verified</mat-icon>
+                    }
+                  </div>
+                }
+              </div>
+            </div>
+
+            <!-- Phone Number Confirmed -->
+            @if (userDetail?.phoneNumberConfirmed !== undefined) {
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+                <label class="font-medium text-gray-700">Teléfono Verificado:</label>
+                <div class="md:col-span-2">
+                  <div class="flex items-center gap-2">
+                    @if (userDetail?.phoneNumberConfirmed) {
+                      <mat-icon class="text-green-500">check_circle</mat-icon>
+                      <span class="text-green-600">Sí</span>
+                    } @else {
+                      <mat-icon class="text-red-500">cancel</mat-icon>
+                      <span class="text-red-600">No</span>
+                    }
+                  </div>
+                </div>
+              </div>
+            }
+
+            <!-- Access Failed Count -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+              <label class="font-medium text-gray-700">Intentos Fallidos:</label>
+              <div class="md:col-span-2">
+                <p class="text-gray-900">{{ userDetail?.accessFailedCount || 0 }}</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="flex justify-end gap-4 mt-8 pt-6 border-t border-gray-200">
+            @if (isEditing) {
+              <button mat-button (click)="toggleEdit()" class="text-gray-600">
+                Cancelar
+              </button>
+              <button mat-raised-button color="primary" (click)="saveProfile()" [disabled]="!form.valid">
+                Guardar Cambios
+              </button>
+            } @else {
+              <button mat-raised-button color="primary" (click)="toggleEdit()">
+                <mat-icon>edit</mat-icon>
+                Editar Perfil
+              </button>
+            }
+          </div>
+        </mat-card-content>
+      </mat-card>
+    }
+  </div>
+</div> 

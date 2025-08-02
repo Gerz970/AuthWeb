@@ -1,0 +1,99 @@
+<div class="h-screen flex items-center justify-center">
+  <form class="shadow-md rounded-md p-5 bg-white w-1/6" [formGroup]="form" (ngSubmit)="register()">
+    <div class="py-4">
+      <h1 class="font-bold py-2">
+        Register
+      </h1>
+      <h6 class="text-slate-600 text-base">
+        Create your account
+      </h6>
+    </div>
+
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Full Name</mat-label>
+      <input matInput placeholder="Full Name" formControlName="fullName" />
+      <mat-icon matPrefix>person</mat-icon>
+      <mat-error *ngIf="form.get('fullName')?.hasError('required')">
+        El nombre completo es requerido
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Email</mat-label>
+      <input matInput placeholder="Email" formControlName="email" />
+      <mat-icon matPrefix>email</mat-icon>
+      <mat-error *ngIf="form.get('email')?.hasError('required')">
+        El email es requerido
+      </mat-error>
+      <mat-error *ngIf="form.get('email')?.hasError('email')">
+        Ingrese un email válido
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Password</mat-label>
+      <input matInput type="{{ hide ? 'password' : 'text'}}" formControlName="password" placeholder="Password" />
+      <mat-icon matPrefix>lock</mat-icon>
+      <mat-icon (click)="hide = !hide" matSuffix>
+        {{ hide ? 'visibility_off':'visibility'}}
+      </mat-icon>
+      <mat-error *ngIf="form.get('password')?.hasError('required')">
+        La contraseña es requerida
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Mensajes de error específicos para contraseña -->
+    <div *ngIf="getPasswordErrors().length > 0" class="text-red-500 text-sm mb-2">
+      <div *ngFor="let error of getPasswordErrors()" class="mb-1">
+        • {{ error }}
+      </div>
+    </div>
+
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Confirm Password</mat-label>
+      <input matInput type="{{ hide ? 'password' : 'text'}}" formControlName="confirmPassword" placeholder="Confirm Password" />
+      <mat-icon matPrefix>lock</mat-icon>
+      <mat-error *ngIf="form.get('confirmPassword')?.hasError('required')">
+        La confirmación de contraseña es requerida
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Mensaje de error para confirmación de contraseña -->
+    <div *ngIf="getConfirmPasswordError()" class="text-red-500 text-sm mb-2">
+      {{ getConfirmPasswordError() }}
+    </div>
+
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Roles</mat-label>
+      <mat-select formControlName="roles" multiple [disabled]="isLoadingRoles">
+        @if (isLoadingRoles) {
+          <mat-option disabled>
+            <mat-spinner diameter="20"></mat-spinner>
+            Cargando roles...
+          </mat-option>
+        } @else {
+          @for (role of availableRoles; track role.id) {
+            <mat-option [value]="role.name">
+              {{ role.name }} ({{ role.totalUsers }} usuarios)
+            </mat-option>
+          }
+        }
+      </mat-select>
+      <mat-icon matPrefix>security</mat-icon>
+      <mat-error *ngIf="form.get('roles')?.hasError('required')">
+        Al menos un rol es requerido
+      </mat-error>
+    </mat-form-field>
+
+    <button type="submit" [disabled]="!form.valid"
+      class="w-full border border-slate-200 rounded-md disabled:bg-purple-400 py-2 px-3 bg-purple-700 text-white font-bold mb-2">
+      Register
+    </button>
+
+    <div class="text-center">
+      <a routerLink="/login" class="text-purple-700 hover:text-purple-900">
+        Already have an account? Login here
+      </a>
+    </div>
+  </form>
+</div> 
