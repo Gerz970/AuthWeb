@@ -45,6 +45,19 @@
   border-radius: 12px 12px 0 0;
   margin: -16px -16px 16px -16px;
   padding: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.role-card mat-card-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  z-index: -1;
 }
 
 .role-card mat-card-title {
@@ -60,6 +73,75 @@
 .full-width {
   width: 100%;
   margin-bottom: 16px;
+}
+
+/* Estilos específicos para los campos de formulario */
+.mat-form-field {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.mat-form-field.mat-form-field-appearance-outline .mat-form-field-outline {
+  border-radius: 8px;
+}
+
+.mat-form-field.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+  color: #667eea;
+}
+
+.mat-form-field.mat-form-field-appearance-outline .mat-form-field-outline-start,
+.mat-form-field.mat-form-field-appearance-outline .mat-form-field-outline-end {
+  border-width: 1px;
+}
+
+.mat-form-field.mat-form-field-appearance-outline .mat-form-field-outline-gap {
+  border-width: 1px;
+}
+
+/* Estilos para los labels */
+.mat-form-field-label {
+  color: #666;
+  font-weight: 500;
+}
+
+.mat-form-field.mat-focused .mat-form-field-label {
+  color: #667eea;
+}
+
+/* Estilos para el input */
+.mat-form-field input.mat-input-element {
+  color: #333;
+  font-size: 1rem;
+}
+
+.mat-form-field input.mat-input-element::placeholder {
+  color: #999;
+}
+
+/* Estilos para los selects */
+.mat-select {
+  color: #333;
+  font-size: 1rem;
+}
+
+.mat-select-placeholder {
+  color: #999;
+}
+
+/* Estilos para las opciones del select */
+.mat-option {
+  color: #333;
+  font-size: 1rem;
+  padding: 12px 16px;
+}
+
+.mat-option:hover {
+  background-color: #f5f5f5;
+}
+
+.mat-option.mat-selected {
+  background-color: #e3f2fd;
+  color: #1976d2;
 }
 
 .action-button {
@@ -87,6 +169,19 @@
   border-radius: 12px 12px 0 0;
   margin: -16px -16px 16px -16px;
   padding: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.roles-table-card mat-card-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  z-index: -1;
 }
 
 .roles-table-card mat-card-title {

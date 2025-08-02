@@ -223,7 +223,25 @@ export class RolesComponent implements OnInit {
           },
           error: (error) => {
             console.error('Error eliminando rol:', error);
-            this.snackBar.open('Error al eliminar el rol', 'Cerrar', {
+            let message = 'Error al eliminar el rol';
+            
+            // Manejar diferentes tipos de respuesta de error
+            if (typeof error.error === 'string') {
+              if (error.error === 'Role deleted successfully') {
+                // Si el backend devuelve éxito como string, tratarlo como éxito
+                this.snackBar.open('Rol eliminado exitosamente', 'Cerrar', {
+                  duration: 3000,
+                });
+                this.reloadRoles();
+                return;
+              } else if (error.error.includes('not found')) {
+                message = 'Rol no encontrado';
+              } else if (error.error.includes('in use')) {
+                message = 'No se puede eliminar el rol porque está en uso';
+              }
+            }
+            
+            this.snackBar.open(message, 'Cerrar', {
               duration: 3000,
             });
           },

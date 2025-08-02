@@ -9,6 +9,8 @@ import { jwtDecode } from 'jwt-decode';
 import { UserDetail } from '../interfaces/user-detail';
 import { RoleRequest } from '../interfaces/role-request';
 import { RoleAssignment } from '../interfaces/role-assignment';
+import { ForgotPasswordRequest } from '../interfaces/forgot-password-request';
+import { ResetPasswordRequest } from '../interfaces/reset-password-request';
 
 @Injectable({
   providedIn: 'root',
@@ -112,7 +114,17 @@ export class AuthService {
 
   // Método para eliminar un rol
   deleteRole(roleId: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}roles/${roleId}`);
+    return this.http.delete(`${this.apiUrl}roles/${roleId}`, { 
+      responseType: 'text' 
+    }).pipe(
+      map(response => {
+        // Si la respuesta es "Role deleted successfully", la tratamos como éxito
+        if (response === 'Role deleted successfully') {
+          return { success: true, message: response };
+        }
+        return response;
+      })
+    );
   }
 
   // Método para obtener lista de usuarios (solo para administradores)
@@ -180,4 +192,24 @@ export class AuthService {
   getToken(): string | null {
     return localStorage.getItem(this.tokenKey);
   }
-} 
+
+  // Método para solicitar recuperación de contraseña
+  forgotPassword(data: ForgotPasswordRequest): Observable<any> {
+    return this.http.post(`${this.apiUrl}account/forgot-password`, data);
+  }
+
+  // Método para resetear la contraseña
+  resetPassword(data: ResetPasswordRequest): Observable<any> {
+    console.log('AuthService - Enviando reset password:', data);
+    console.log('AuthService - URL:', `${this.apiUrl}account/reset-password`);
+    console.log('AuthService - Token a enviar:', data.token);
+    console.log('AuthService - Longitud del token:', data.token.length);
+    
+    // Crear headers sin el token de autorización para esta petición específica
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    
+    return this.http.post(`${this.apiUrl}account/reset-password`, data, { headers });
+  }
+}

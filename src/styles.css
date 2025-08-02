@@ -8,3 +8,91 @@ body {
   margin: 0; 
   font-family: Roboto, "Helvetica Neue", sans-serif; 
 }
+
+/* Estilos globales para corregir problemas de formularios */
+.mat-form-field {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.mat-form-field.mat-form-field-appearance-outline .mat-form-field-outline {
+  border-radius: 8px;
+}
+
+.mat-form-field.mat-form-field-appearance-outline .mat-form-field-outline-start,
+.mat-form-field.mat-form-field-appearance-outline .mat-form-field-outline-end,
+.mat-form-field.mat-form-field-appearance-outline .mat-form-field-outline-gap {
+  border-width: 1px !important;
+}
+
+.mat-form-field.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+  color: #667eea;
+}
+
+.mat-form-field.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick .mat-form-field-outline-start,
+.mat-form-field.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick .mat-form-field-outline-end,
+.mat-form-field.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick .mat-form-field-outline-gap {
+  border-width: 2px !important;
+}
+
+/* Estilos para los labels */
+.mat-form-field-label {
+  color: #666 !important;
+  font-weight: 500;
+}
+
+.mat-form-field.mat-focused .mat-form-field-label {
+  color: #667eea !important;
+}
+
+/* Estilos para el input */
+.mat-form-field input.mat-input-element {
+  color: #333 !important;
+  font-size: 1rem;
+}
+
+.mat-form-field input.mat-input-element::placeholder {
+  color: #999 !important;
+}
+
+/* Estilos para los selects */
+.mat-select {
+  color: #333 !important;
+  font-size: 1rem;
+}
+
+.mat-select-placeholder {
+  color: #999 !important;
+}
+
+/* Estilos para las opciones del select */
+.mat-option {
+  color: #333 !important;
+  font-size: 1rem;
+  padding: 12px 16px;
+}
+
+.mat-option:hover {
+  background-color: #f5f5f5 !important;
+}
+
+.mat-option.mat-selected {
+  background-color: #e3f2fd !important;
+  color: #1976d2 !important;
+}
+
+/* Estilos para los headers de cards */
+.mat-card-header {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Estilos para corregir problemas de padding en cards */
+.mat-card-content {
+  padding: 16px !important;
+}
+
+.mat-card-header {
+  padding: 16px !important;
+  margin: -16px -16px 16px -16px !important;
+}
