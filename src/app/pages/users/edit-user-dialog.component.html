@@ -7,86 +7,92 @@
     <p class="text-blue-100 mt-2">Modifica la información del usuario seleccionado</p>
   </div>
 
-  <mat-dialog-content class="py-6 px-6 bg-white">
+  <mat-dialog-content class="py-8 px-12 bg-white">
     <!-- User Avatar -->
-    <div class="flex justify-center mb-6">
-      <div class="w-20 h-20 bg-blue-500 rounded-full flex items-center justify-center text-white text-2xl font-bold shadow-sm">
+    <div class="flex justify-center mb-8">
+      <div class="w-28 h-28 bg-blue-500 rounded-full flex items-center justify-center text-white text-4xl font-bold shadow-sm">
         {{ getInitials(data.user.fullName) }}
       </div>
     </div>
 
-    <form [formGroup]="form" class="space-y-6">
-      <!-- ID (readonly) -->
-      <mat-form-field appearance="outline" class="w-full">
-        <mat-label>ID del Usuario</mat-label>
-        <input matInput formControlName="id" readonly>
-        <mat-icon matPrefix>fingerprint</mat-icon>
-        <mat-hint>Identificador único del usuario</mat-hint>
-      </mat-form-field>
+    <form [formGroup]="form" class="space-y-8">
+      <!-- Primera fila: ID, Nombre, Email y Teléfono -->
+      <div class="grid grid-cols-4 gap-8">
+        <!-- ID (readonly) -->
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>ID del Usuario</mat-label>
+          <input matInput formControlName="id" readonly>
+          <mat-icon matPrefix>fingerprint</mat-icon>
+          <mat-hint>Identificador único del usuario</mat-hint>
+        </mat-form-field>
 
-      <!-- Full Name -->
-      <mat-form-field appearance="outline" class="w-full">
-        <mat-label>Nombre Completo</mat-label>
-        <input matInput formControlName="fullName" placeholder="Nombre completo">
-        <mat-icon matPrefix>person</mat-icon>
-        <mat-error *ngIf="form.get('fullName')?.hasError('required')">
-          El nombre es requerido
-        </mat-error>
-      </mat-form-field>
+        <!-- Full Name -->
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Nombre Completo</mat-label>
+          <input matInput formControlName="fullName" placeholder="Nombre completo">
+          <mat-icon matPrefix>person</mat-icon>
+          <mat-error *ngIf="form.get('fullName')?.hasError('required')">
+            El nombre es requerido
+          </mat-error>
+        </mat-form-field>
 
-      <!-- Email -->
-      <mat-form-field appearance="outline" class="w-full">
-        <mat-label>Email</mat-label>
-        <input matInput formControlName="email" placeholder="Email" type="email">
-        <mat-icon matPrefix>email</mat-icon>
-        <mat-error *ngIf="form.get('email')?.hasError('required')">
-          El email es requerido
-        </mat-error>
-        <mat-error *ngIf="form.get('email')?.hasError('email')">
-          Ingrese un email válido
-        </mat-error>
-      </mat-form-field>
+        <!-- Email -->
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" placeholder="Email" type="email">
+          <mat-icon matPrefix>email</mat-icon>
+          <mat-error *ngIf="form.get('email')?.hasError('required')">
+            El email es requerido
+          </mat-error>
+          <mat-error *ngIf="form.get('email')?.hasError('email')">
+            Ingrese un email válido
+          </mat-error>
+        </mat-form-field>
 
-      <!-- Phone Number -->
-      <mat-form-field appearance="outline" class="w-full">
-        <mat-label>Teléfono</mat-label>
-        <input matInput formControlName="phoneNumber" placeholder="Teléfono (opcional)">
-        <mat-icon matPrefix>phone</mat-icon>
-        <mat-hint>Número de teléfono opcional</mat-hint>
-      </mat-form-field>
+        <!-- Phone Number -->
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Teléfono</mat-label>
+          <input matInput formControlName="phoneNumber" placeholder="Teléfono (opcional)">
+          <mat-icon matPrefix>phone</mat-icon>
+          <mat-hint>Número de teléfono opcional</mat-hint>
+        </mat-form-field>
+      </div>
 
-      <!-- Roles -->
-      <mat-form-field appearance="outline" class="w-full">
-        <mat-label>Roles</mat-label>
-        <mat-select formControlName="roles" multiple [disabled]="isLoadingRoles">
-          @if (isLoadingRoles) {
-            <mat-option disabled>
-              <mat-spinner diameter="20"></mat-spinner>
-              Cargando roles...
-            </mat-option>
-          } @else {
-            @for (role of availableRoles; track role.id) {
-              <mat-option [value]="role.name">
-                {{ role.name }} ({{ role.totalUsers }} usuarios)
+      <!-- Segunda fila: Roles (ancho completo) -->
+      <div class="grid grid-cols-1 gap-8">
+        <!-- Roles -->
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Roles</mat-label>
+          <mat-select formControlName="roles" multiple [disabled]="isLoadingRoles">
+            @if (isLoadingRoles) {
+              <mat-option disabled>
+                <mat-spinner diameter="20"></mat-spinner>
+                Cargando roles...
               </mat-option>
+            } @else {
+              @for (role of availableRoles; track role.id) {
+                <mat-option [value]="role.name">
+                  {{ role.name }} ({{ role.totalUsers }} usuarios)
+                </mat-option>
+              }
             }
-          }
-        </mat-select>
-        <mat-icon matPrefix>security</mat-icon>
-        <mat-error *ngIf="form.get('roles')?.hasError('required')">
-          Al menos un rol es requerido
-        </mat-error>
-      </mat-form-field>
+          </mat-select>
+          <mat-icon matPrefix>security</mat-icon>
+          <mat-error *ngIf="form.get('roles')?.hasError('required')">
+            Al menos un rol es requerido
+          </mat-error>
+        </mat-form-field>
+      </div>
 
       <!-- Current Roles Display -->
       @if (data.user.roles.length > 0) {
-        <div class="mt-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
-          <label class="text-sm font-semibold text-gray-700 mb-2 block">Roles Actuales:</label>
-          <div class="flex flex-wrap gap-2">
+        <div class="mt-8 p-8 bg-gray-50 rounded-lg border border-gray-200">
+          <label class="text-sm font-semibold text-gray-700 mb-4 block">Roles Actuales:</label>
+          <div class="flex flex-wrap gap-3">
             @for (role of data.user.roles; track role) {
               <mat-chip 
                 [color]="role === 'Admin' ? 'warn' : 'primary'" 
-                class="text-xs font-medium">
+                class="text-sm font-medium">
                 {{ role }}
               </mat-chip>
             }
@@ -96,8 +102,8 @@
     </form>
   </mat-dialog-content>
 
-  <div class="bg-gray-50 px-6 py-4 rounded-b-xl border-t border-gray-200">
-    <mat-dialog-actions align="end" class="gap-3">
+  <div class="bg-gray-50 px-12 py-8 rounded-b-xl border-t border-gray-200">
+    <mat-dialog-actions align="end" class="gap-6">
       <button mat-button (click)="onCancel()" [disabled]="isSubmitting" class="cancel-btn">
         <mat-icon>close</mat-icon>
         Cancelar
@@ -108,11 +114,11 @@
         (click)="onSubmit()" 
         [disabled]="!form.valid || isSubmitting"
         class="submit-btn">
+        <mat-icon>save</mat-icon>
         @if (isSubmitting) {
           <mat-spinner diameter="20" class="mr-2"></mat-spinner>
           Actualizando...
         } @else {
-          <mat-icon>save</mat-icon>
           Actualizar Usuario
         }
       </button>

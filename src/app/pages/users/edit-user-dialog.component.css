@@ -1,14 +1,14 @@
 /* Estilos específicos para el diálogo de edición de usuarios */
 .edit-user-dialog {
-  min-width: 450px;
-  max-width: 550px;
+  min-width: 1400px;
+  max-width: 1600px;
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
 .mat-dialog-content {
-  max-height: 70vh;
+  max-height: 80vh;
   overflow-y: auto;
   padding: 0;
 }
@@ -27,10 +27,35 @@
 
 .mat-chip {
   margin: 2px;
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   font-weight: 500;
   border-radius: 12px;
   padding: 4px 8px;
+}
+
+/* Layout de columnas */
+.grid {
+  display: grid;
+}
+
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.grid-cols-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.gap-6 {
+  gap: 1.5rem;
+}
+
+.gap-8 {
+  gap: 2rem;
 }
 
 /* Estilos para los botones */
@@ -64,11 +89,11 @@
 }
 
 /* Estilos para el avatar */
-.edit-user-dialog .w-20 {
+.edit-user-dialog .w-28 {
   transition: transform 0.2s ease;
 }
 
-.edit-user-dialog .w-20:hover {
+.edit-user-dialog .w-28:hover {
   transform: scale(1.02);
 }
 
@@ -79,14 +104,56 @@
 }
 
 /* Responsive adjustments */
+@media (max-width: 1600px) {
+  .edit-user-dialog {
+    min-width: 1200px;
+    max-width: 1400px;
+  }
+  
+  .grid-cols-4 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1400px) {
+  .edit-user-dialog {
+    min-width: 1000px;
+    max-width: 1200px;
+  }
+  
+  .grid-cols-3,
+  .grid-cols-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1024px) {
+  .edit-user-dialog {
+    min-width: 800px;
+    max-width: 900px;
+  }
+  
+  .grid-cols-2,
+  .grid-cols-3,
+  .grid-cols-4 {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 768px) {
   .edit-user-dialog {
-    min-width: 320px;
-    max-width: 90vw;
+    min-width: 95vw;
+    max-width: 98vw;
   }
   
   .mat-dialog-content {
     padding: 16px;
+  }
+  
+  .grid-cols-2,
+  .grid-cols-3,
+  .grid-cols-4 {
+    grid-template-columns: 1fr;
   }
 }
 

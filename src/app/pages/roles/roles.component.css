@@ -1,0 +1,232 @@
+.roles-container {
+  padding: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.roles-header {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.roles-header h1 {
+  color: #333;
+  font-size: 2.5rem;
+  font-weight: 300;
+  margin: 0;
+}
+
+.roles-content {
+  display: flex;
+  gap: 30px;
+  min-height: 600px;
+}
+
+.left-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.right-panel {
+  flex: 1;
+}
+
+.role-card {
+  background: #f8f9fa;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.role-card mat-card-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 12px 12px 0 0;
+  margin: -16px -16px 16px -16px;
+  padding: 16px;
+}
+
+.role-card mat-card-title {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.role-card mat-card-content {
+  padding: 16px;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.action-button {
+  width: 100%;
+  height: 48px;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.roles-table-card {
+  background: #f8f9fa;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  height: fit-content;
+}
+
+.roles-table-card mat-card-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 12px 12px 0 0;
+  margin: -16px -16px 16px -16px;
+  padding: 16px;
+}
+
+.roles-table-card mat-card-title {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.roles-table-card mat-card-content {
+  padding: 16px;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  gap: 16px;
+}
+
+.loading-container p {
+  color: #666;
+  margin: 0;
+}
+
+.roles-table {
+  width: 100%;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.roles-table th {
+  background: #f5f5f5;
+  font-weight: 600;
+  color: #333;
+  padding: 16px;
+}
+
+.roles-table td {
+  padding: 16px;
+  border-bottom: 1px solid #eee;
+}
+
+.roles-table tr:hover {
+  background: #f9f9f9;
+}
+
+.no-roles {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  color: #666;
+  text-align: center;
+}
+
+.no-roles mat-icon {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+  color: #ccc;
+  margin-bottom: 16px;
+}
+
+.no-roles p {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+  .roles-content {
+    flex-direction: column;
+  }
+  
+  .left-panel {
+    order: 2;
+  }
+  
+  .right-panel {
+    order: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .roles-container {
+    padding: 10px;
+  }
+  
+  .roles-header h1 {
+    font-size: 2rem;
+  }
+  
+  .roles-content {
+    gap: 20px;
+  }
+  
+  .role-card mat-card-content {
+    padding: 12px;
+  }
+  
+  .roles-table-card mat-card-content {
+    padding: 12px;
+  }
+}
+
+/* Animaciones */
+.role-card, .roles-table-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.role-card:hover, .roles-table-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.action-button {
+  transition: all 0.2s ease;
+}
+
+.action-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos para los spinners */
+mat-spinner {
+  margin-right: 8px;
+}
+
+/* Estilos para los botones de acción en la tabla */
+.roles-table button[mat-icon-button] {
+  transition: all 0.2s ease;
+}
+
+.roles-table button[mat-icon-button]:hover {
+  transform: scale(1.1);
+  background: rgba(244, 67, 54, 0.1);
+} 

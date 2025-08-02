@@ -97,7 +97,7 @@ export class UsersComponent implements OnInit {
 
   openEditDialog(user: UserDetail) {
     const dialogRef = this.dialog.open(EditUserDialogComponent, {
-      width: '500px',
+      width: '1500px',
       data: { user } as EditUserDialogData,
       disableClose: true,
     });

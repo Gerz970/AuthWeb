@@ -7,6 +7,8 @@ import { AuthResponse } from '../interfaces/auth-response';
 import { Role } from '../interfaces/role';
 import { jwtDecode } from 'jwt-decode';
 import { UserDetail } from '../interfaces/user-detail';
+import { RoleRequest } from '../interfaces/role-request';
+import { RoleAssignment } from '../interfaces/role-assignment';
 
 @Injectable({
   providedIn: 'root',
@@ -76,6 +78,41 @@ export class AuthService {
   // Método para obtener roles disponibles desde el API
   getRoles(): Observable<Role[]> {
     return this.http.get<Role[]>(`${this.apiUrl}roles`);
+  }
+
+  // Método para crear un nuevo rol
+  createRole(roleRequest: RoleRequest): Observable<any> {
+    return this.http.post(`${this.apiUrl}roles`, roleRequest, { 
+      responseType: 'text' 
+    }).pipe(
+      map(response => {
+        // Si la respuesta es "Role created successfully", la tratamos como éxito
+        if (response === 'Role created successfully') {
+          return { success: true, message: response };
+        }
+        return response;
+      })
+    );
+  }
+
+  // Método para asignar un rol a un usuario
+  assignRole(roleAssignment: RoleAssignment): Observable<any> {
+    return this.http.post(`${this.apiUrl}roles/assign`, roleAssignment, { 
+      responseType: 'text' 
+    }).pipe(
+      map(response => {
+        // Si la respuesta es "Role assigned successfully", la tratamos como éxito
+        if (response === 'Role assigned successfully') {
+          return { success: true, message: response };
+        }
+        return response;
+      })
+    );
+  }
+
+  // Método para eliminar un rol
+  deleteRole(roleId: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}roles/${roleId}`);
   }
 
   // Método para obtener lista de usuarios (solo para administradores)
