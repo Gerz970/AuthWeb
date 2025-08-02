@@ -15,70 +15,88 @@ body {
   margin-bottom: 16px;
 }
 
-.mat-form-field.mat-form-field-appearance-outline .mat-form-field-outline {
-  border-radius: 8px;
+/* Forzar el layout del campo */
+.mat-form-field.mat-form-field-appearance-outline .mat-form-field-wrapper {
+  padding-bottom: 0;
 }
 
-.mat-form-field.mat-form-field-appearance-outline .mat-form-field-outline-start,
-.mat-form-field.mat-form-field-appearance-outline .mat-form-field-outline-end,
-.mat-form-field.mat-form-field-appearance-outline .mat-form-field-outline-gap {
-  border-width: 1px !important;
+.mat-form-field.mat-form-field-appearance-outline .mat-form-field-infix {
+  padding: 16px 20px !important;
+  border-top: none !important;
+  min-height: 24px !important;
+  display: flex !important;
+  align-items: center !important;
 }
 
-.mat-form-field.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
-  color: #667eea;
+/* Estilos para los iconos con espaciado forzado */
+.mat-form-field .mat-icon {
+  margin-right: 20px !important;
+  color: #6b7280;
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0 !important;
+  order: -1;
 }
 
-.mat-form-field.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick .mat-form-field-outline-start,
-.mat-form-field.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick .mat-form-field-outline-end,
-.mat-form-field.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick .mat-form-field-outline-gap {
-  border-width: 2px !important;
+.mat-form-field.mat-focused .mat-icon {
+  color: #2563eb;
+}
+
+/* Estilos para el input con espaciado forzado */
+.mat-form-field input.mat-input-element {
+  color: #1f2937 !important;
+  font-size: 1rem;
+  padding: 0 !important;
+  background: transparent;
+  margin-left: 0 !important;
+  line-height: 1.5;
+  width: 100% !important;
+  flex: 1;
+  min-width: 0;
+}
+
+.mat-form-field input.mat-input-element::placeholder {
+  color: #9ca3af !important;
 }
 
 /* Estilos para los labels */
 .mat-form-field-label {
-  color: #666 !important;
+  color: #374151 !important;
   font-weight: 500;
+  font-size: 0.875rem;
 }
 
 .mat-form-field.mat-focused .mat-form-field-label {
-  color: #667eea !important;
-}
-
-/* Estilos para el input */
-.mat-form-field input.mat-input-element {
-  color: #333 !important;
-  font-size: 1rem;
-}
-
-.mat-form-field input.mat-input-element::placeholder {
-  color: #999 !important;
+  color: #2563eb !important;
 }
 
 /* Estilos para los selects */
 .mat-select {
-  color: #333 !important;
+  color: #1f2937 !important;
   font-size: 1rem;
+  width: 100%;
+  flex: 1;
 }
 
 .mat-select-placeholder {
-  color: #999 !important;
+  color: #9ca3af !important;
 }
 
 /* Estilos para las opciones del select */
 .mat-option {
-  color: #333 !important;
+  color: #1f2937 !important;
   font-size: 1rem;
   padding: 12px 16px;
 }
 
 .mat-option:hover {
-  background-color: #f5f5f5 !important;
+  background-color: #f3f4f6 !important;
 }
 
 .mat-option.mat-selected {
-  background-color: #e3f2fd !important;
-  color: #1976d2 !important;
+  background-color: #dbeafe !important;
+  color: #1d4ed8 !important;
 }
 
 /* Estilos para los headers de cards */
@@ -95,4 +113,33 @@ body {
 .mat-card-header {
   padding: 16px !important;
   margin: -16px -16px 16px -16px !important;
+}
+
+/* Override completo para el outline */
+.mat-form-field.mat-form-field-appearance-outline .mat-form-field-outline {
+  border-radius: 8px !important;
+  border: 1px solid #e5e7eb !important;
+  background: #f9fafb !important;
+}
+
+.mat-form-field.mat-form-field-appearance-outline .mat-form-field-outline-start,
+.mat-form-field.mat-form-field-appearance-outline .mat-form-field-outline-end,
+.mat-form-field.mat-form-field-appearance-outline .mat-form-field-outline-gap {
+  border: none !important;
+  background: transparent !important;
+}
+
+.mat-form-field.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline {
+  border: 2px solid #2563eb !important;
+  background: white !important;
+}
+
+/* Eliminar todos los pseudo-elementos */
+.mat-form-field.mat-form-field-appearance-outline .mat-form-field-outline-start::before,
+.mat-form-field.mat-form-field-appearance-outline .mat-form-field-outline-end::before,
+.mat-form-field.mat-form-field-appearance-outline .mat-form-field-outline-gap::before,
+.mat-form-field.mat-form-field-appearance-outline .mat-form-field-outline-start::after,
+.mat-form-field.mat-form-field-appearance-outline .mat-form-field-outline-end::after,
+.mat-form-field.mat-form-field-appearance-outline .mat-form-field-outline-gap::after {
+  display: none !important;
 }

@@ -97,9 +97,12 @@ export class UsersComponent implements OnInit {
 
   openEditDialog(user: UserDetail) {
     const dialogRef = this.dialog.open(EditUserDialogComponent, {
-      width: '1500px',
+      width: 'auto',
+      maxWidth: '90vw',
+      maxHeight: '90vh',
       data: { user } as EditUserDialogData,
       disableClose: true,
+      panelClass: 'edit-user-dialog-container'
     });
 
     dialogRef.afterClosed().subscribe((result) => {

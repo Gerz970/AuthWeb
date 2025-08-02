@@ -12,14 +12,18 @@
           <mat-card-title>Crear Nuevo Rol</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Nombre del Rol*</mat-label>
-            <input 
-              matInput 
-              [(ngModel)]="newRoleName" 
-              placeholder="Ingrese el nombre del rol"
-              [disabled]="creatingRole">
-          </mat-form-field>
+          <div class="input-group">
+            <label class="input-label">Nombre del Rol</label>
+            <div class="input-container">
+              <mat-icon class="input-icon">security</mat-icon>
+              <input 
+                type="text" 
+                [(ngModel)]="newRoleName" 
+                class="custom-input"
+                placeholder="Ingrese el nombre del rol"
+                [disabled]="creatingRole">
+            </div>
+          </div>
           <button 
             mat-raised-button 
             color="primary" 
@@ -38,25 +42,37 @@
           <mat-card-title>Asignar Rol a Usuario</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Usuario</mat-label>
-            <mat-select [(ngModel)]="selectedUserId" [disabled]="assigningRole">
-              <mat-option value="">Seleccione un usuario</mat-option>
-              <mat-option *ngFor="let user of users" [value]="user.id">
-                {{ user.fullName }} ({{ user.email }})
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+          <div class="input-group">
+            <label class="input-label">Usuario</label>
+            <div class="input-container">
+              <mat-icon class="input-icon">person</mat-icon>
+              <select 
+                [(ngModel)]="selectedUserId" 
+                [disabled]="assigningRole"
+                class="custom-select">
+                <option value="">Seleccione un usuario</option>
+                <option *ngFor="let user of users" [value]="user.id">
+                  {{ user.fullName }} ({{ user.email }})
+                </option>
+              </select>
+            </div>
+          </div>
 
-          <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Rol</mat-label>
-            <mat-select [(ngModel)]="selectedRoleId" [disabled]="assigningRole">
-              <mat-option value="">Seleccione un rol</mat-option>
-              <mat-option *ngFor="let role of roles" [value]="role.id">
-                {{ role.name }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+          <div class="input-group">
+            <label class="input-label">Rol</label>
+            <div class="input-container">
+              <mat-icon class="input-icon">security</mat-icon>
+              <select 
+                [(ngModel)]="selectedRoleId" 
+                [disabled]="assigningRole"
+                class="custom-select">
+                <option value="">Seleccione un rol</option>
+                <option *ngFor="let role of roles" [value]="role.id">
+                  {{ role.name }}
+                </option>
+              </select>
+            </div>
+          </div>
 
           <button 
             mat-raised-button 

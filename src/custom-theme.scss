@@ -33,3 +33,38 @@ body {
   // Reset the user agent margin.
   margin: 0;
 }
+
+// Override Material Design form field styles to prevent conflicts
+.mat-form-field.mat-form-field-appearance-outline .mat-form-field-outline {
+  border-radius: 8px !important;
+}
+
+.mat-form-field.mat-form-field-appearance-outline .mat-form-field-outline-start,
+.mat-form-field.mat-form-field-appearance-outline .mat-form-field-outline-end,
+.mat-form-field.mat-form-field-appearance-outline .mat-form-field-outline-gap {
+  border: 1px solid #e5e7eb !important;
+  border-radius: 8px !important;
+  background: #f9fafb !important;
+}
+
+.mat-form-field.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+  color: #2563eb !important;
+  border-color: #2563eb !important;
+}
+
+.mat-form-field.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-start,
+.mat-form-field.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-end,
+.mat-form-field.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-gap {
+  border: 2px solid #2563eb !important;
+  background: white !important;
+}
+
+// Remove unwanted lines
+.mat-form-field.mat-form-field-appearance-outline .mat-form-field-outline-start::before,
+.mat-form-field.mat-form-field-appearance-outline .mat-form-field-outline-end::before,
+.mat-form-field.mat-form-field-appearance-outline .mat-form-field-outline-gap::before,
+.mat-form-field.mat-form-field-appearance-outline .mat-form-field-outline-start::after,
+.mat-form-field.mat-form-field-appearance-outline .mat-form-field-outline-end::after,
+.mat-form-field.mat-form-field-appearance-outline .mat-form-field-outline-gap::after {
+  display: none !important;
+}
