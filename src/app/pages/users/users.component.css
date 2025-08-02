@@ -11,24 +11,53 @@
   padding: 24px;
 }
 
-/* Estilos para la tabla */
-.mat-table {
+/* Estilos para la tabla elegante */
+.elegant-table {
   width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
 }
 
-.mat-header-cell {
+.elegant-table .mat-header-cell {
   font-weight: 600;
   color: #374151;
+  background: #f8fafc;
+  border-bottom: 2px solid #e2e8f0;
+  padding: 16px 12px;
 }
 
-.mat-cell {
-  padding: 12px 8px;
+.elegant-table .mat-cell {
+  padding: 16px 12px;
+  border-bottom: 1px solid #f1f5f9;
+  transition: background-color 0.2s ease;
+}
+
+.elegant-table .mat-row:hover .mat-cell {
+  background-color: #f8fafc;
+}
+
+.elegant-table .mat-row:nth-child(even) .mat-cell {
+  background-color: #ffffff;
 }
 
 /* Estilos para los chips de roles */
 .mat-chip {
   margin: 2px;
   font-size: 0.75rem;
+  font-weight: 500;
+  border-radius: 12px;
+  padding: 4px 8px;
+}
+
+/* Estilos para los botones de acción */
+.action-btn {
+  transition: all 0.2s ease;
+  border-radius: 8px;
+}
+
+.action-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Estilos para los iconos de estado */
@@ -38,13 +67,47 @@
   height: 16px;
 }
 
+/* Estilos para las tarjetas de estadísticas */
+.mat-card-header {
+  background: #2563eb;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
-  .mat-table {
+  .elegant-table {
     font-size: 0.875rem;
   }
   
-  .mat-cell {
-    padding: 8px 4px;
+  .elegant-table .mat-cell {
+    padding: 12px 8px;
   }
+  
+  .mat-card-header {
+    padding: 16px;
+  }
+  
+  .mat-card-title {
+    font-size: 1.5rem !important;
+  }
+}
+
+/* Animaciones suaves */
+.mat-card {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Estilos para el fondo */
+.bg-gray-50 {
+  background-color: #f9fafb;
 } 

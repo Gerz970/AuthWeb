@@ -1,65 +1,67 @@
-<div>
-  <mat-toolbar color="primary" style="padding:10px 50px">
-    <button mat-icon-button>
-      <mat-icon>menu</mat-icon>
-    </button>
-    <a routerLink="/">My App</a>
-    <div class="w-full"></div>
-
-    @if(isLoggedIn()){
-    <div *ngIf="authService.getUserDetail() as userDetail">
-      <div class="flex gap-5 items-center">
-        <a [matMenuTriggerFor]="menu" class="flex gap2 cursor-pointer items-center">
-          <div class="bg-red-400 text-white font-bold shadow-md rounded-full w-5 h-5 p-5 flex justify-center items-center">
-            {{userDetail!.fullName[0].toUpperCase()}}
-          </div>
-          <div class="text-white flex flex-col">
-            <h1 class="p-0 m-0 font-medium">
-              {{userDetail?.fullName}}
-            </h1>
-            <p class="p-0 m-0 font-medium text-xs">
-              {{userDetail?.roles}}
-            </p>
-          </div>
+<div class="navbar-container">
+  <mat-toolbar class="modern-navbar">
+    <div class="navbar-content">
+      <!-- Logo y título -->
+      <div class="navbar-brand">
+        <button mat-icon-button class="menu-btn">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <a routerLink="/" class="app-title">
+          <mat-icon class="app-icon">security</mat-icon>
+          <span>AuthWeb</span>
         </a>
-        <mat-menu #menu="matMenu">
-          <button [routerLink]="['/profile']" mat-menu-item>
-            <mat-icon>account_circle</mat-icon>
-            <span>
-              Ver Perfil
-            </span>
-          </button>
-          @if (authService.isAdmin()) {
-            <button [routerLink]="['/users']" mat-menu-item>
-              <mat-icon>people</mat-icon>
-              <span>
-                Gestión de Usuarios
-              </span>
-            </button>
-          }
-          <button (click)="logout()" mat-menu-item>
-            <mat-icon>
-              logout
-            </mat-icon>
-            <span>Cerrar Sesión</span>
-          </button>
-        </mat-menu>
       </div>
+
+      <!-- Espaciador -->
+      <div class="navbar-spacer"></div>
+
+      <!-- Menú de usuario -->
+      @if(isLoggedIn()){
+        <div class="user-menu" *ngIf="authService.getUserDetail() as userDetail">
+          <button [matMenuTriggerFor]="menu" class="user-profile-btn">
+            <div class="user-avatar">
+              {{userDetail!.fullName[0].toUpperCase()}}
+            </div>
+            <div class="user-info">
+              <span class="user-name">{{userDetail?.fullName}}</span>
+              <span class="user-roles">{{userDetail?.roles}}</span>
+            </div>
+            <mat-icon class="dropdown-icon">arrow_drop_down</mat-icon>
+          </button>
+          
+          <mat-menu #menu="matMenu" class="modern-menu">
+            <button [routerLink]="['/profile']" mat-menu-item class="menu-item">
+              <mat-icon>account_circle</mat-icon>
+              <span>Ver Perfil</span>
+            </button>
+            
+            @if (authService.isAdmin()) {
+              <button [routerLink]="['/users']" mat-menu-item class="menu-item admin-item">
+                <mat-icon>people</mat-icon>
+                <span>Gestión de Usuarios</span>
+              </button>
+            }
+            
+            <mat-divider></mat-divider>
+            
+            <button (click)="logout()" mat-menu-item class="menu-item logout-item">
+              <mat-icon>logout</mat-icon>
+              <span>Cerrar Sesión</span>
+            </button>
+          </mat-menu>
+        </div>
+      } @else {
+        <div class="auth-buttons">
+          <a mat-button routerLink="/login" class="login-btn">
+            <mat-icon>login</mat-icon>
+            Iniciar Sesión
+          </a>
+          <a mat-raised-button routerLink="/register" class="register-btn">
+            <mat-icon>person_add</mat-icon>
+            Registrarse
+          </a>
+        </div>
+      }
     </div>
-    }@else{
-<div>
-  <div class="flex gap5 items-center">
-    <a mat-button routerLink="/login">
-      Login
-    </a>
-
-    <a mat-button routerLink="/register">
-      Register
-    </a>
-
-  </div>
-  </div>
-    }
-
   </mat-toolbar>
 </div> 
